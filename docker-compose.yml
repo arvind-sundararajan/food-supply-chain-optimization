@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=production
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=food_supply_chain
+      - POSTGRES_PASSWORD=optimization_engine
+      - POSTGRES_DB=food_supply_chain_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
